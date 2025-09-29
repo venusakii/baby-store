@@ -19,7 +19,7 @@ const products = [
     reviews: 1247,
     price: "$12.99",
     originalPrice: "$15.99",
-    image: "premium baby pacifier silicone",
+    image: "https://m.media-amazon.com/images/I/51JdQWimMaL._AC_SL1500_.jpg",
     badge: "Best Seller",
     description:
       "The MAM Perfect Pacifier is designed with orthodontic expertise to support natural oral development. Made from extra soft silicone with an ultra-thin neck, it's accepted by 94% of babies and recommended by pediatric dentists worldwide.",
