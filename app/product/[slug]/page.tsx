@@ -13,6 +13,7 @@ import { notFound } from "next/navigation"
 const products = [
   {
     id: 1,
+    slug: "mam-perfect-pacifier",
     name: "MAM Perfect Pacifier",
     category: "pacifiers",
     rating: 4.8,
@@ -53,6 +54,7 @@ const products = [
   },
   {
     id: 2,
+    slug: "philips-avent-natural-bottle",
     name: "Philips Avent Natural Bottle",
     category: "bottles",
     rating: 4.7,
@@ -94,6 +96,7 @@ const products = [
   },
   {
     id: 3,
+    slug: "dr-browns-options-plus-bottle",
     name: "Dr. Brown's Options+ Bottle",
     category: "bottles",
     rating: 4.9,
@@ -135,9 +138,8 @@ const products = [
   },
 ]
 
-export default function ProductPage({ params }: { params: { id: string } }) {
-  const productId = Number.parseInt(params.id)
-  const product = products.find((p) => p.id === productId)
+export default function ProductPage({ params }: { params: { slug: string } }) {
+  const product = products.find((p) => p.slug === params.slug)
 
   if (!product) {
     notFound()
@@ -477,7 +479,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {products
-              .filter((p) => p.id !== product.id)
+              .filter((p) => p.slug !== product.slug)
               .slice(0, 3)
               .map((relatedProduct) => (
                 <Card key={relatedProduct.id} className="group hover:shadow-lg transition-shadow">
@@ -509,7 +511,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
                       <Badge variant="secondary">{relatedProduct.badge}</Badge>
                     </div>
                     <Button className="w-full" asChild>
-                      <Link href={`/product/${relatedProduct.id}`}>View Details</Link>
+                      <Link href={`/product/${relatedProduct.slug}`}>View Details</Link>
                     </Button>
                   </CardContent>
                 </Card>

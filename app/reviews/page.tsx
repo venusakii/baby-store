@@ -15,6 +15,7 @@ import Link from "next/link"
 const products = [
   {
     id: 1,
+    slug: "mam-perfect-pacifier", // Added slug field
     name: "MAM Perfect Pacifier",
     category: "pacifiers",
     rating: 4.8,
@@ -28,6 +29,7 @@ const products = [
   },
   {
     id: 2,
+    slug: "philips-avent-natural-bottle", // Added slug field
     name: "Philips Avent Natural Bottle",
     category: "bottles",
     rating: 4.7,
@@ -41,6 +43,7 @@ const products = [
   },
   {
     id: 3,
+    slug: "dr-browns-options-plus-bottle", // Added slug field
     name: "Dr. Brown's Options+ Bottle",
     category: "bottles",
     rating: 4.9,
@@ -54,6 +57,7 @@ const products = [
   },
   {
     id: 4,
+    slug: "nuk-orthodontic-pacifier", // Added slug field
     name: "NUK Orthodontic Pacifier",
     category: "pacifiers",
     rating: 4.6,
@@ -67,6 +71,7 @@ const products = [
   },
   {
     id: 5,
+    slug: "tommee-tippee-closer-to-nature", // Added slug field
     name: "Tommee Tippee Closer to Nature",
     category: "bottles",
     rating: 4.5,
@@ -80,6 +85,7 @@ const products = [
   },
   {
     id: 6,
+    slug: "pacifier-clip-set", // Added slug field
     name: "Pacifier Clip Set",
     category: "accessories",
     rating: 4.4,
@@ -93,6 +99,7 @@ const products = [
   },
   {
     id: 7,
+    slug: "bottle-warmer-sterilizer", // Added slug field
     name: "Bottle Warmer & Sterilizer",
     category: "accessories",
     rating: 4.7,
@@ -106,6 +113,7 @@ const products = [
   },
   {
     id: 8,
+    slug: "chicco-physioforma-pacifier", // Added slug field
     name: "Chicco PhysioForma Pacifier",
     category: "pacifiers",
     rating: 4.6,
@@ -227,7 +235,7 @@ export default function ReviewsPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {displayedProducts.map((product) => (
-              <Link href={`/product/${product.id}`} key={product.id}>
+              <Link href={`/product/${product.slug}`} key={product.id}>
                 <Card className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 cursor-pointer">
                   <CardHeader className="pb-4">
                     <div className="relative">
@@ -282,7 +290,7 @@ export default function ReviewsPage() {
 
                     <div className="space-y-2">
                       <Button className="w-full" asChild>
-                        <Link href={`/product/${product.id}`}>Read Full Review</Link>
+                        <Link href={`/product/${product.slug}`}>Read Full Review</Link>
                       </Button>
                       <Button variant="outline" className="w-full bg-transparent" asChild>
                         <a
