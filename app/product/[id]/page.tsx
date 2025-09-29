@@ -220,12 +220,6 @@ export default function ProductPage({ params }: { params: { id: string } }) {
               </div>
 
               <div className="space-y-2">
-                <div className="flex items-center gap-4">
-                  <span className="text-3xl font-bold text-primary">{product.price}</span>
-                  {product.originalPrice && (
-                    <span className="text-xl text-muted-foreground line-through">{product.originalPrice}</span>
-                  )}
-                </div>
                 <div className="flex items-center gap-2">
                   <Badge variant="secondary">Amazon Prime</Badge>
                   {product.fastShipping && <Badge variant="outline">Fast Shipping</Badge>}
@@ -512,7 +506,6 @@ export default function ProductPage({ params }: { params: { id: string } }) {
                   </CardHeader>
                   <CardContent>
                     <div className="flex items-center justify-between mb-4">
-                      <span className="text-xl font-bold text-primary">{relatedProduct.price}</span>
                       <Badge variant="secondary">{relatedProduct.badge}</Badge>
                     </div>
                     <Button className="w-full" asChild>

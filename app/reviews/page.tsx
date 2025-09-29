@@ -9,7 +9,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Star, Filter, Search } from "lucide-react"
+import { Star, Search } from "lucide-react"
 import Link from "next/link"
 
 const products = [
@@ -212,17 +212,6 @@ export default function ReviewsPage() {
                 <SelectItem value="price-high">Price: High to Low</SelectItem>
               </SelectContent>
             </Select>
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={() => {
-                setSearchTerm("")
-                setSelectedCategory("all")
-                setSortBy("rating")
-              }}
-            >
-              <Filter className="h-4 w-4" />
-            </Button>
           </div>
         </div>
       </section>
@@ -238,74 +227,76 @@ export default function ReviewsPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {displayedProducts.map((product) => (
-              <Card key={product.id} className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-                <CardHeader className="pb-4">
-                  <div className="relative">
-                    <div className="h-48 bg-gradient-to-br from-green-100 to-green-200 rounded-lg mb-4 flex items-center justify-center overflow-hidden">
-                      <img
-                        src={product.image || "/placeholder.svg"}
-                        alt={product.name}
-                        className="h-full w-full object-contain p-4"
-                      />
-                    </div>
-                    <Badge className="absolute top-2 right-2" variant="secondary">
-                      {product.badge}
-                    </Badge>
-                  </div>
-                  <CardTitle className="text-lg line-clamp-2">{product.name}</CardTitle>
-                  <CardDescription className="line-clamp-2">{product.description}</CardDescription>
-                </CardHeader>
-                <CardContent className="pt-0">
-                  <div className="flex items-center gap-2 mb-3">
-                    <div className="flex items-center">
-                      {[...Array(5)].map((_, i) => (
-                        <Star
-                          key={i}
-                          className={`h-4 w-4 ${
-                            i < Math.floor(product.rating) ? "text-yellow-400 fill-current" : "text-gray-300"
-                          }`}
+              <Link href={`/product/${product.id}`} key={product.id}>
+                <Card className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 cursor-pointer">
+                  <CardHeader className="pb-4">
+                    <div className="relative">
+                      <div className="h-48 bg-gradient-to-br from-green-100 to-green-200 rounded-lg mb-4 flex items-center justify-center overflow-hidden">
+                        <img
+                          src={product.image || "/placeholder.svg"}
+                          alt={product.name}
+                          className="h-full w-full object-contain p-4"
                         />
-                      ))}
+                      </div>
+                      <Badge className="absolute top-2 right-2" variant="secondary">
+                        {product.badge}
+                      </Badge>
                     </div>
-                    <span className="text-sm font-medium">{product.rating}</span>
-                    <span className="text-sm text-muted-foreground">({product.reviews})</span>
-                  </div>
+                    <CardTitle className="text-lg line-clamp-2">{product.name}</CardTitle>
+                    <CardDescription className="line-clamp-2">{product.description}</CardDescription>
+                  </CardHeader>
+                  <CardContent className="pt-0">
+                    <div className="flex items-center gap-2 mb-3">
+                      <div className="flex items-center">
+                        {[...Array(5)].map((_, i) => (
+                          <Star
+                            key={i}
+                            className={`h-4 w-4 ${
+                              i < Math.floor(product.rating) ? "text-yellow-400 fill-current" : "text-gray-300"
+                            }`}
+                          />
+                        ))}
+                      </div>
+                      <span className="text-sm font-medium">{product.rating}</span>
+                      <span className="text-sm text-muted-foreground">({product.reviews})</span>
+                    </div>
 
-                  <div className="space-y-2 mb-4">
-                    <p className="text-sm font-medium text-muted-foreground">Key Features:</p>
-                    <ul className="text-xs text-muted-foreground space-y-1">
-                      {product.pros.slice(0, 2).map((pro, index) => (
-                        <li key={index} className="flex items-center gap-1">
-                          <div className="h-1 w-1 bg-primary rounded-full" />
-                          {pro}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                    <div className="space-y-2 mb-4">
+                      <p className="text-sm font-medium text-muted-foreground">Key Features:</p>
+                      <ul className="text-xs text-muted-foreground space-y-1">
+                        {product.pros.slice(0, 2).map((pro, index) => (
+                          <li key={index} className="flex items-center gap-1">
+                            <div className="h-1 w-1 bg-primary rounded-full" />
+                            {pro}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
 
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-xl font-bold text-primary">{product.price}</span>
-                    <Badge variant="outline" className="text-xs">
-                      Amazon Prime
-                    </Badge>
-                  </div>
+                    <div className="flex items-center justify-between mb-4">
+                      {/* Removed price display */}
+                      <Badge variant="outline" className="text-xs">
+                        Amazon Prime
+                      </Badge>
+                    </div>
 
-                  <div className="space-y-2">
-                    <Button className="w-full" asChild>
-                      <Link href={`/product/${product.id}`}>Read Full Review</Link>
-                    </Button>
-                    <Button variant="outline" className="w-full bg-transparent" asChild>
-                      <a
-                        href={`https://amazon.com/s?k=${encodeURIComponent(product.name)}&tag=thebabystore-20`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Buy on Amazon
-                      </a>
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
+                    <div className="space-y-2">
+                      <Button className="w-full" asChild>
+                        <Link href={`/product/${product.id}`}>Read Full Review</Link>
+                      </Button>
+                      <Button variant="outline" className="w-full bg-transparent" asChild>
+                        <a
+                          href={`https://amazon.com/s?k=${encodeURIComponent(product.name)}&tag=thebabystore-20`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          Buy on Amazon
+                        </a>
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
             ))}
           </div>
 

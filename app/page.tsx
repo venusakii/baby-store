@@ -196,7 +196,6 @@ export default function HomePage() {
                 </CardHeader>
                 <CardContent>
                   <div className="flex items-center justify-between mb-4">
-                    <span className="text-2xl font-bold text-primary">{product.price}</span>
                     <Badge variant="secondary">Amazon Prime</Badge>
                   </div>
                   <Button className="w-full" asChild>
